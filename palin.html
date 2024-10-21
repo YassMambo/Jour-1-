@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container-md">
+            <h1 class="text-center pt-3 fw-bold text-decoration-underline fst-italic" style="font-family: Lucida;">Le Dernier Mois du Condamné</h1>
+            <h2 class="pt-3 fw-bold text-decoration-underline fst-italic" style="font-family: Lucida;">Jour n°1</h2>
+            <div class="m-3">
+                <label for="formGroupExampleInput" class="form-label">Vérifions si votre mot est un palindrome : </label>
+                <input type="text" class="form-control" id="word" placeholder="Veuillez écrire ici">
+            </div>
+            <div class="m-3">
+                <button class="btn btn-secondary" onclick="verifyPalindrome()">Vérifions</button>
+            </div>
+              <!-- Résultat affiché ici -->
+             <div class="text-center fw-bold" id="result"></div>
+        </div>
+        
+    <script>
+            function palindrome(word) 
+            {
+                const clean = word.toLowerCase().replace(/[\W_]/g, '');
+                const invert = clean.split('').reverse().join('');
+                return clean === invert;
+            }
+
+            function verifyPalindrome() {
+                // Récupérer la valeur entrée dans la zone de texte
+                const word = document.getElementById('word').value;
+
+                // Vérifier si la zone de texte est vide
+            if (word === "") {
+                document.getElementById('result').innerHTML = "Veuillez entrer un texte.";
+                document.getElementById('result').style.color = "orange";
+                return;
+            }
+                 // Nettoyer les caractères non alphabétiques et vérifier que le mot a au moins 2 lettres
+                const cleanedWord = word.replace(/[\W_]/g, '');
+                if (cleanedWord.length < 2) {
+                    document.getElementById('result').innerHTML = "Le mot doit contenir au moins 2 lettres.";
+                    document.getElementById('result').style.color = "orange";
+                    return;
+                }
+                // Vérifier si c'est un palindrome
+                const result = palindrome(word);
+
+                // Afficher le résultat dans la div avec l'ID "result"
+                if (result) {
+                    document.getElementById('result').innerHTML = "Héhé, effectivement c'est un palindrome !";
+                    document.getElementById('result').style.color = "green";
+                } else {
+                    document.getElementById('result').innerHTML = "Oh Non !, malheureusement ce n'est pas un palindrome.";
+                    document.getElementById('result').style.color = "red";
+                }
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    </body>
+</html>
